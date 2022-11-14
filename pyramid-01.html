@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset='utf-8'>
+	<meta http-equiv="X-UA-Compatible" content="chrome=1">
+	<meta name="viewport"
+		content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0,viewport-fit=cover" />
+
+	<title>Pyramid</title>
+
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.6/assets/owl.carousel.css" rel="stylesheet" />
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.6/assets/owl.theme.default.css"
+		rel="stylesheet" />
+
+	<style>
+		html,
+		body {
+			width: 100%;
+			height: 100%;
+		}
+
+		body {
+			margin: 0;
+			padding: 0;
+			color: #333;
+			font-family: Arial, Helvetiva, Sans-serif;
+			font-size: 16px;
+			line-height: 1;
+			text-rendering: optimizeLegibility;
+			text-rendering: geometricPrecision;
+		}
+
+		a,
+		abbr,
+		acronym,
+		address,
+		applet,
+		article,
+		aside,
+		audio,
+		b,
+		big,
+		blockquote,
+		canvas,
+		caption,
+		center,
+		cite,
+		code,
+		dd,
+		del,
+		details,
+		dfn,
+		div,
+		dl,
+		dt,
+		em,
+		embed,
+		fieldset,
+		figcaption,
+		figure,
+		footer,
+		form,
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6,
+		header,
+		hgroup,
+		i,
+		iframe,
+		img,
+		ins,
+		kbd,
+		label,
+		legend,
+		li,
+		mark,
+		menu,
+		nav,
+		object,
+		ol,
+		output,
+		p,
+		pre,
+		q,
+		ruby,
+		s,
+		samp,
+		section,
+		small,
+		span,
+		strike,
+		strong,
+		sub,
+		summary,
+		sup,
+		table,
+		tbody,
+		td,
+		tfoot,
+		th,
+		thead,
+		time,
+		tr,
+		tt,
+		u,
+		ul,
+		var,
+		video {
+			margin: 0;
+			padding: 0;
+			vertical-align: baseline;
+			border: 0;
+		}
+
+		*,
+		*::before,
+		*::after {
+			-webkit-box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			box-sizing: border-box;
+		}
+
+		.pyramid-card-group {
+			margin: 0 auto;
+			width: 100%;
+			max-width: 1400px;
+			overflow: hidden;
+		}
+
+		.pyramid-card-group div::after {
+			clear: both;
+			margin: 0;
+			padding: 0;
+			display: table;
+			width: 0;
+			height: 0;
+			font-size: 0;
+			line-height: 0;
+			content: ' ';
+			overflow: hidden;
+			visibility: hidden;
+		}
+
+		.pyramid-card-group-inner {
+			margin: 0 -15px;
+			display: flex;
+			flex-wrap: wrap;
+
+			justify-content: center;
+			align-items: center;
+		}
+
+		.pyramid-card-group .cards-column {
+			margin: 0;
+			padding: 0 15px;
+			-webkit-box-flex: 0;
+			flex: 0 0 50%;
+			width: 100%;
+			max-width: 50%;
+			list-style-type: none;
+		}
+
+		.card-item {
+			margin: 5px;
+			display: block;
+			float: left;
+			list-style-type: none;
+		}
+
+		.card-item .card-item-inner {
+			width: 80px;
+			height: 120px;
+			line-height: 120px;
+			text-align: center;
+			border: 1px solid #bbb;
+
+			-webkit-border-radius: 5px;
+			-moz-border-radius: 5px;
+			border-radius: 5px;
+		}
+
+		.card-row {
+			margin: 0 0 2px;
+			text-align: center;
+		}
+
+		.card-position {
+			position: relative;
+			margin: 2px;
+			display: inline-block;
+			width: 80px;
+			height: 120px;
+			line-height: 120px;
+			text-align: center;
+			border: 1px solid #bbb;
+
+			-webkit-border-radius: 5px;
+			-moz-border-radius: 5px;
+			border-radius: 5px;
+		}
+
+		.card-position span {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			display: block;
+			width: 30px;
+			height: 30px;
+			line-height: 30px;
+			text-align: center;
+			border: 1px solid #bbb;
+
+			-webkit-transform: translate(-50%, -50%);
+			-moz-transform: translate(-50%, -50%);
+			transform: translate(-50%, -50%);
+			-webkit-border-radius: 2px;
+			-moz-border-radius: 2px;
+			border-radius: 2px;
+		}
+
+		@media screen and (max-width: 800px) {
+			.pyramid-card-group .cards-column {
+				flex: 0 0 100%;
+				max-width: 100%;
+			}
+
+			.pyramid-card-group .cards-column.pyramid-column {
+				order: 1;
+			}
+
+			.pyramid-card-group .cards-column.card-list-column {
+				order: 2;
+			}
+		}
+
+		/* OWL Slider */
+		.owl-carousel {
+			display: block;
+		}
+
+		.owl-carousel .owl-stage-outer {
+			overflow: visible;
+		}
+
+		.draggable {
+			background-color: #fff;
+		}
+
+		.draggable.ui-draggable-dragging {
+			display: block;
+			background-color: #fff;
+		}
+
+		.droppable {
+			background: rgba(50, 150, 200, 0.20);
+
+			-webkit-box-shadow: 4px 4px 4px #fafafa;
+			-moz-box-shadow: 4px 4px 4px #fafafa;
+			box-shadow: 4px 4px 4px #fafafa;
+		}
+
+		.droppable.active {
+			z-index: 5;
+			border: 3px dashed yellow;
+		}
+
+		.droppable.hover {
+			background-color: #fa4b2a;
+		}
+	</style>
+</head>
+
+<body>
+
+	<div class="pyramid-card-group">
+		<div class="pyramid-card-group-inner">
+			<div class="cards-column card-list-column">
+				<div class="cards-column-inner owl-carousel">
+
+					<div class="draggable block card-item">
+						<div class="card-item-inner">
+							<span>Card 1</span>
+						</div>
+					</div>
+
+					<div class="draggable block card-item">
+						<div class="card-item-inner">
+							<span>Card 2</span>
+						</div>
+					</div>
+
+					<div class="draggable block card-item">
+						<div class="card-item-inner">
+							<span>Card 3</span>
+						</div>
+					</div>
+
+					<div class="draggable block card-item">
+						<div class="card-item-inner">
+							<span>Card 4</span>
+						</div>
+					</div>
+
+					<div class="draggable block card-item">
+						<div class="card-item-inner">
+							<span>Card 5</span>
+						</div>
+					</div>
+
+					<div class="draggable block card-item">
+						<div class="card-item-inner">
+							<span>Card 6</span>
+						</div>
+					</div>
+
+					<div class="draggable block card-item">
+						<div class="card-item-inner">
+							<span>Card 7</span>
+						</div>
+					</div>
+
+					<div class="draggable block card-item">
+						<div class="card-item-inner">
+							<span>Card 8</span>
+						</div>
+					</div>
+
+					<div class="draggable block card-item">
+						<div class="card-item-inner">
+							<span>Card 9</span>
+						</div>
+					</div>
+
+					<div class="draggable block card-item">
+						<div class="card-item-inner">
+							<span>Card 10</span>
+						</div>
+					</div>
+
+				</div>
+			</div>
+			<div class="cards-column pyramid-column">
+				<div class="cards-column-inner">
+
+					<div class="card-row">
+						<div class="droppable card-position">
+							<span>1</span>
+						</div>
+					</div>
+
+					<div class="card-row">
+						<div class="droppable card-position">
+							<span>2</span>
+						</div>
+						<div class="droppable card-position">
+							<span>3</span>
+						</div>
+					</div>
+
+					<div class="card-row">
+						<div class="droppable card-position">
+							<span>4</span>
+						</div>
+						<div class="droppable card-position">
+							<span>5</span>
+						</div>
+						<div class="droppable card-position">
+							<span>6</span>
+						</div>
+					</div>
+
+					<div class="card-row">
+						<div class="droppable card-position">
+							<span>7</span>
+						</div>
+						<div class="droppable card-position">
+							<span>8</span>
+						</div>
+						<div class="droppable card-position">
+							<span>9</span>
+						</div>
+						<div class="droppable card-position">
+							<span>10</span>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.6/owl.carousel.min.js"></script>
+
+	<!--
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.map"></script>
+-->
+
+	<script>
+		// https://swiperjs.com/
+		// https://splidejs.com/
+		// https://codepen.io/lambdacreatives/pen/wWoLmY
+		// https://stackoverflow.com/questions/28251644/disabling-owl-carousel-at-a-specific-viewport-width
+
+		// https://www.elated.com/drag-and-drop-with-jquery-your-essential-guide/
+		// https://www.elated.com/res/File/articles/development/javascript/jquery/drag-and-drop-with-jquery-your-essential-guide/card-game.html
+		// Complete example: A drag-and-drop number cards game
+
+		// https://stackoverflow.com/questions/26746823/jquery-ui-drag-and-drop-snap-to-center
+
+		// http://www.tutorialspark.com/jqueryUI/jQuery_UI_Drag_Drop_Interaction_Scope.php
+
+		// https://github.com/OwlCarousel2/OwlCarousel2/issues/1220
+
+		// https://forum.jquery.com/topic/jquery-lcarousel-lite-cant-drag-items-outside-carousel
+
+
+		// Alternate solution here, using InteractJS
+		// https://codepen.io/eljefedelrodeodeljefe/pen/vybegM
+
+		$(document).ready(function () {
+
+			(function ($) {
+				$.fn.centerOnDrop = function (ui) {
+					ui.draggable.position({
+						my: 'center',
+						at: 'center',
+						of: this,
+						using: function (pos) {
+							$(this).animate(pos, 200, 'linear');
+						}
+					});
+				};
+			})(jQuery);
+
+			$('.draggable').draggable();
+
+			$('.droppable').droppable({
+				accept: function ($item) {
+					return $(this).data('color') === $item.data('color');
+				},
+				drop: function (event, ui) {
+					//ui.draggable.text("Status : Dropped");
+					//$(this).centerOnDrop(ui);
+
+					var $this = $(this);
+					ui.draggable.position({
+						my: "center",
+						at: "center",
+						of: $this,
+						using: function (pos) {
+							$(this).animate(pos, 200, "linear");
+						}
+					});
+				},
+				activeClass: "active",
+				hoverClass: "hover",
+				tolerance: "fit"
+			});
+
+			/* ******************************************************************* */
+			var owl = $('.owl-carousel');
+			var owlOptions = {
+				margin: 0,
+				loop: true,
+				autoWidth: true,
+				items: 1,
+				responsive: {
+					0: {
+						items: 2
+					}
+				}
+			};
+
+			if ($(window).width() < 800) {
+				var owlActive = owl.owlCarousel(owlOptions);
+			} else {
+				owl.addClass('off');
+			}
+
+			$(window).resize(function () {
+				if ($(window).width() < 800) {
+					if ($('.owl-carousel').hasClass('off')) {
+						var owlActive = owl.owlCarousel(owlOptions);
+
+						owl.removeClass('off');
+					}
+				} else {
+					if (!$('.owl-carousel').hasClass('off')) {
+						owl.addClass('off').trigger('destroy.owl.carousel');
+						owl.find('.owl-stage-outer').children(':eq(0)').unwrap();
+					}
+				}
+			});
+		});
+	</script>
+
+</body>
+
+</html>
